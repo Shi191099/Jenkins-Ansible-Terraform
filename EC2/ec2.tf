@@ -91,7 +91,7 @@ content = <<-EOT
 resource "null_resource" "nulllocal3"{
   depends_on = [local_file.ipaddr]
 provisioner "local-exec" {
-        command     = "ansible-playbook /home/deepaksaini/JenkinsServer/Ansible/jenkins_ansible.yml"
+        command     = "ansible-playbook /home/shi/JenkinsServer/Ansible/jenkins_ansible.yml"
     }
 
 }
