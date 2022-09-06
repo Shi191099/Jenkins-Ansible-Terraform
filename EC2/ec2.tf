@@ -55,7 +55,7 @@ subnet_id = aws_subnet.mysubnet.id
 ami           = "ami-079b5e5b3971bd10d"
 associate_public_ip_address = true
 instance_type = "t2.medium"
-key_name = "testvm"
+key_name = "all"
 vpc_security_group_ids = [ aws_security_group.mysg.id ]
 
 
@@ -79,7 +79,7 @@ Name = "JenkinsMaster"
 
 resource "local_file" "ipaddr" {
     
-filename = "/home/deepaksaini/Inventory/inventory.txt"
+filename = "inventory.txt"
 content = <<-EOT
     [JenkinsMaster]
     ${aws_instance.Master.public_ip}
@@ -91,7 +91,7 @@ content = <<-EOT
 resource "null_resource" "nulllocal3"{
   depends_on = [local_file.ipaddr]
 provisioner "local-exec" {
-        command     = "ansible-playbook /home/shi/JenkinsServer/Ansible/jenkins_ansible.yml"
+        command     = "ansible-playbook /home/minfy/JenkinsServer/Ansible/jenkins_ansible.yml"
     }
 
 }
