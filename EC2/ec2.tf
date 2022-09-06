@@ -54,27 +54,14 @@ depends_on = [aws_security_group.mysg]
 subnet_id = aws_subnet.mysubnet.id
 ami           = "ami-079b5e5b3971bd10d"
 associate_public_ip_address = true
-instance_type = "t2.medium"
+instance_type = "t2.micro"
 key_name = "all"
 vpc_security_group_ids = [ aws_security_group.mysg.id ]
-
-
-
-
-
-metadata_options {
-    http_endpoint               = "enabled"
-    http_put_response_hop_limit = 20
-     http_tokens = "optional"
-    instance_metadata_tags = "enabled"
-  }
 
 tags = {
 Name = "JenkinsMaster"
 }
 }
-
-
 
 
 resource "local_file" "ipaddr" {
@@ -85,8 +72,6 @@ content = <<-EOT
     ${aws_instance.Master.public_ip}
   EOT
 }
-
-
 
 resource "null_resource" "nulllocal3"{
   depends_on = [local_file.ipaddr]
